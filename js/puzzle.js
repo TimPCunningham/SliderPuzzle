@@ -34,7 +34,6 @@ class Puzzle {
         let empty = this.checkForEmpty(x,y);
 
         if(empty) {
-            console.log('test');
             this.tileMap[empty.x][empty.y] = this.tileMap[x][y];
             this.tileMap[x][y] = undefined;
             background(51);
@@ -63,8 +62,6 @@ class Puzzle {
             let rand1 = this.getRandomLocation();
             let rand2 = this.getRandomLocation();
 
-            console.log(rand1, rand2);
-
             let temp = this.tileMap[rand1.x][rand1.y];
             this.tileMap[rand1.x][rand1.y] = this.tileMap[rand2.x][rand2.y];
             this.tileMap[rand2.x][rand2.y] = temp;
@@ -77,5 +74,21 @@ class Puzzle {
             x: Math.floor(Math.random() * this.size),
             y: Math.floor(Math.random() * this.size)
         }
+    }
+
+    copy() {
+        let cpy = new Puzzle(this.size, this.img, this.imgSize);
+
+        for(let x = 0; x < this.size; x++) {
+            for(let y = 0; y < this.size; y++) {
+                if(this.tileMap[x][y] == undefined) {
+                    cpy.tileMap[x][y] = undefined;
+                 } else {
+                     cpy.tileMap[x][y] = this.tileMap[x][y].copy();
+                 }
+            }
+        }
+
+        return cpy;
     }
 }

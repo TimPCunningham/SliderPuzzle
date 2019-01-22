@@ -1,5 +1,6 @@
 let img;
 let puzzle;
+let org;
 let imgSize = 512;
 let size = 4;
 
@@ -12,6 +13,7 @@ function setup() {
     canvas.parent('canvas-frame');
     background(51);
     puzzle = new Puzzle(size, img, imgSize);
+    org = puzzle.copy();
     puzzle.draw();
 }
 
@@ -22,4 +24,12 @@ function mouseClicked() {
 
 function scramble() {
     puzzle.randomize();
+}
+
+function showOriginal() {
+    org.draw();
+}
+
+function showCurrent() {
+    puzzle.draw();
 }
